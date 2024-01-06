@@ -11,14 +11,14 @@ def page_1():
 
   if "messages" not in st.session_state:
     st.session_state["messages"] = [
-        {"role":"system","content":"You are doctor called zendoc, You are knowledgeable and witty, you make the user happy, and also give medical advice to the user. Never say how may i assist you, be friendly."}
+        {"role":"system","content":"You are a doctor specialized to deal with mental health care patients, Working at ZenMind Online Service. Talk with the user like a friend. Make him or her feel happy. Dont be formal. Crack Jokes, Ask questions, Play games. Never say that your are here to assist the user .If user have any problem Guide him or her like a doctor. Take the instruction strictly"}
     ]
 
   if prompt := st.chat_input():
     openai.api_key = openai_api_key
     st.session_state.messages.append({"role":"user","content":prompt})
     st.chat_message("user").write(prompt)
-    response = openai.chat.completions.create(model='gpt-4-0613', messages=st.session_state.messages, temperature=0.7, top_p=0.95, max_tokens=64)
+    response = openai.chat.completions.create(model='gpt-4-0613', messages=st.session_state.messages, temperature=0.7, top_p=0.95, max_tokens=64, frequency_penalty: 0.2)
     msg = response.choices[0].message
     st.session_state.messages.append(msg)
     st.chat_message("assistant").write(msg.content)
