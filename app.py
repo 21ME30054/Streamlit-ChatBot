@@ -29,7 +29,7 @@ def page_1():
     openai.api_key = openai_api_key
     st.session_state.messages.append({"role":"user","content":prompt})
     st.chat_message("user").write(prompt)
-    response = openai.chat.completions.create(model='gpt-4-0613', messages=st.session_state.messages, temperature=0.7, top_p=0.95, max_tokens=64)
+    response = openai.chat.completions.create(model='gpt-4-0613', messages=st.session_state.messages, temperature=1.3, top_p=0.95, max_tokens=64)
     msg = response.choices[0].message
     st.session_state.messages.append(msg)
     st.chat_message("assistant").write(msg.content)
